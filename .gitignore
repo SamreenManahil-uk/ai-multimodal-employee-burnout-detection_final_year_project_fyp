@@ -1,0 +1,70 @@
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.pytest_cache/
+.ipynb_checkpoints/
+.vscode/
+.DS_Store
+data/private/
+data/raw/
+
+# Local environments and secrets
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+
+# Private documents and datasets
+*.docx
+*.pdf
+*.pptx
+data/
+*.joblib
+*.pkl
+
+# Generated assessment records
+outputs/assessments/
+outputs/computer_vision/
+outputs/shap_local/
+
+# Large generated files
+project_structure.txt
+
+# Local environments and secrets
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+
+# Private documents and datasets
+*.docx
+*.pdf
+*.pptx
+data/
+*.joblib
+*.pkl
+
+# Generated assessment records
+outputs/assessments/
+outputs/computer_vision/
+outputs/shap_local/
+
+# Large generated files
+project_structure.txt
+*.docx
+project_structure.txt
+project_structure.txtstreamlit
+requirements_before_cv.txt

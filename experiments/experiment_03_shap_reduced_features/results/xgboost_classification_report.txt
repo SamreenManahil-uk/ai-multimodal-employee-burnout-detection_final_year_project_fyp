@@ -1,0 +1,8 @@
+                       precision    recall  f1-score   support
+
+          Low Burnout     0.9532    0.9658    0.9595      8775
+Moderate/High Burnout     0.7295    0.6604    0.6932      1225
+
+             accuracy                         0.9284     10000
+            macro avg     0.8413    0.8131    0.8264     10000
+         weighted avg     0.9258    0.9284    0.9269     10000

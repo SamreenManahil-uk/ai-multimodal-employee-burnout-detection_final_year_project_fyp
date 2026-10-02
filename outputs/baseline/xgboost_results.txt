@@ -1,0 +1,22 @@
+XGBOOST MODEL RESULTS
+=====================
+
+Model-selection methodology
+---------------------------
+SMOTE was applied inside each cross-validation training fold.
+The test set was not used during cross-validation or model selection.
+
+5-Fold Cross-Validation Results
+--------------------------------
+CV Accuracy: 0.927000
+CV Precision: 0.704893
+CV Recall: 0.695840
+CV F1: 0.700288
+CV ROC-AUC: 0.957927
+CV Accuracy Standard Deviation: 0.001867
+CV Precision Standard Deviation: 0.010163
+CV Recall Standard Deviation: 0.006687
+CV F1 Standard Deviation: 0.006290
+CV ROC-AUC Standard Deviation: 0.001321
+
+Final test-set results are produced only for the selected model in compare_models.py.

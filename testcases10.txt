@@ -1,0 +1,325 @@
+TEN TEST CASES FOR APP TESTING (UPDATED — matches Low/Moderate/High dropdowns)
+================================================================================
+For these 7 fields, your app uses a dropdown: Low / Moderate / High
+(internally mapped to Low=2, Moderate=5, High=8):
+  job_satisfaction, manager_support, work_life_balance, social_support_score,
+  stress_level, anxiety_score, depression_score
+
+All other fields are normal number/dropdown inputs, filled as usual.
+
+
+CASE 1 — Clean Low-Risk (baseline, everything good)
+----------------------------------------------------
+age: 28
+gender: Female
+job_role: QA Engineer
+experience_years: 3
+company_size: Mid-size
+work_mode: Hybrid
+work_hours_per_week: 38
+overtime_hours: 1
+meetings_per_day: 2
+deadlines_missed: 0
+sleep_hours: 7.5
+physical_activity_days: 4
+screen_time_hours: 6
+caffeine_intake: 1
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: High
+manager_support: High
+work_life_balance: High
+social_support_score: High
+stress_level: Low
+anxiety_score: Low
+depression_score: Low
+
+FEEDBACK TEXT: "I really enjoy my work, my manager is supportive, and I have a good balance between work and personal life."
+EXPECTED: Low risk — sanity check that "everything good" reads as Low.
+
+
+CASE 2 — Clean High-Risk (baseline, everything bad)
+----------------------------------------------------
+age: 34
+gender: Male
+job_role: Software Engineer
+experience_years: 8
+company_size: Startup
+work_mode: Onsite
+work_hours_per_week: 62
+overtime_hours: 15
+meetings_per_day: 7
+deadlines_missed: 3
+sleep_hours: 4.5
+physical_activity_days: 0
+screen_time_hours: 12
+caffeine_intake: 5
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: Low
+manager_support: Low
+work_life_balance: Low
+social_support_score: Low
+stress_level: High
+anxiety_score: High
+depression_score: High
+
+FEEDBACK TEXT: "I am completely burned out, exhausted every single day, and I cannot cope with this workload anymore. I feel hopeless."
+EXPECTED: High risk — sanity check that "everything bad" clearly reads as High.
+
+
+CASE 3 — CONFLICT: Structured data LOW risk, but text says exhausted
+----------------------------------------------------------------------
+age: 26
+gender: Female
+job_role: Data Scientist
+experience_years: 2
+company_size: Large
+work_mode: Remote
+work_hours_per_week: 37
+overtime_hours: 0
+meetings_per_day: 1
+deadlines_missed: 0
+sleep_hours: 7
+physical_activity_days: 3
+screen_time_hours: 6
+caffeine_intake: 2
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: High
+manager_support: High
+work_life_balance: High
+social_support_score: High
+stress_level: Low
+anxiety_score: Low
+depression_score: Low
+
+FEEDBACK TEXT: "Honestly I feel emotionally exhausted and completely burned out, even though everything on paper looks fine."
+EXPECTED: ML = Low, NLP = High/Elevated. Key "modalities disagree" case.
+
+
+CASE 4 — CONFLICT: Structured data HIGH risk, but text sounds positive
+--------------------------------------------------------------------------
+age: 40
+gender: Male
+job_role: DevOps
+experience_years: 12
+company_size: MNC
+work_mode: Onsite
+work_hours_per_week: 58
+overtime_hours: 12
+meetings_per_day: 6
+deadlines_missed: 2
+sleep_hours: 5
+physical_activity_days: 1
+screen_time_hours: 10
+caffeine_intake: 4
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: Low
+manager_support: Low
+work_life_balance: Low
+social_support_score: Low
+stress_level: High
+anxiety_score: High
+depression_score: Moderate
+
+FEEDBACK TEXT: "Things are okay, I'm managing fine and staying positive despite the busy schedule."
+EXPECTED: ML = High, NLP = Low. Reverse conflict case.
+
+
+CASE 5 — Moderate / borderline everything
+-------------------------------------------
+age: 31
+gender: Non-binary
+job_role: Product Manager
+experience_years: 5
+company_size: Mid-size
+work_mode: Hybrid
+work_hours_per_week: 47
+overtime_hours: 5
+meetings_per_day: 4
+deadlines_missed: 1
+sleep_hours: 6.5
+physical_activity_days: 2
+screen_time_hours: 8
+caffeine_intake: 3
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: Moderate
+manager_support: Moderate
+work_life_balance: Moderate
+social_support_score: Moderate
+stress_level: Moderate
+anxiety_score: Moderate
+depression_score: Moderate
+
+FEEDBACK TEXT: "Work is busy but manageable most days, though some weeks are harder than others."
+EXPECTED: Moderate across the board — tests genuinely ambiguous mid-range case.
+
+
+CASE 6 — Long hours but well-supported (workload-specific stress)
+-------------------------------------------------------------------------------
+age: 29
+gender: Female
+job_role: ML Engineer
+experience_years: 4
+company_size: Large
+work_mode: Remote
+work_hours_per_week: 55
+overtime_hours: 10
+meetings_per_day: 3
+deadlines_missed: 1
+sleep_hours: 6
+physical_activity_days: 2
+screen_time_hours: 9
+caffeine_intake: 3
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: Moderate
+manager_support: High
+work_life_balance: Moderate
+social_support_score: High
+stress_level: Moderate
+anxiety_score: Moderate
+depression_score: Low
+
+FEEDBACK TEXT: "The hours are long right now, but my manager checks in on me regularly which helps a lot."
+EXPECTED: Moderate — tests whether good manager support offsets high workload.
+
+
+CASE 7 — Low stress_level but high anxiety/depression (internal inconsistency)
+--------------------------------------------------------------------------------------------
+age: 36
+gender: Male
+job_role: Backend Developer
+experience_years: 9
+company_size: Startup
+work_mode: Hybrid
+work_hours_per_week: 42
+overtime_hours: 3
+meetings_per_day: 2
+deadlines_missed: 0
+sleep_hours: 5.5
+physical_activity_days: 1
+screen_time_hours: 9
+caffeine_intake: 3
+has_therapy: Yes
+seeks_professional_help: Yes
+
+job_satisfaction: Moderate
+manager_support: Moderate
+work_life_balance: Moderate
+social_support_score: Moderate
+stress_level: Low
+anxiety_score: High
+depression_score: High
+
+FEEDBACK TEXT: "Work itself is fine, I just haven't been feeling like myself lately."
+EXPECTED: Good case to show SHAP behaviour on an internally inconsistent structured profile.
+
+
+CASE 8 — Good workload but poor manager/social support (isolation case)
+-----------------------------------------------------------------------------
+age: 25
+gender: Female
+job_role: Frontend Developer
+experience_years: 1
+company_size: MNC
+work_mode: Remote
+work_hours_per_week: 40
+overtime_hours: 2
+meetings_per_day: 1
+deadlines_missed: 0
+sleep_hours: 7
+physical_activity_days: 3
+screen_time_hours: 7
+caffeine_intake: 2
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: Moderate
+manager_support: Low
+work_life_balance: Moderate
+social_support_score: Low
+stress_level: Moderate
+anxiety_score: Moderate
+depression_score: Moderate
+
+FEEDBACK TEXT: "The work isn't too hard, but I feel pretty isolated and don't get much support from my manager."
+EXPECTED: Moderate — isolates whether low support alone raises risk.
+
+
+CASE 9 — Deliberately near the 0.5 decision threshold
+------------------------------------------------------------------------------
+age: 33
+gender: Male
+job_role: Software Engineer
+experience_years: 6
+company_size: Large
+work_mode: Onsite
+work_hours_per_week: 45
+overtime_hours: 4
+meetings_per_day: 3
+deadlines_missed: 1
+sleep_hours: 6
+physical_activity_days: 2
+screen_time_hours: 8
+caffeine_intake: 3
+has_therapy: No
+seeks_professional_help: No
+
+job_satisfaction: Moderate
+manager_support: Moderate
+work_life_balance: Moderate
+social_support_score: Moderate
+stress_level: Moderate
+anxiety_score: Moderate
+depression_score: Moderate
+
+FEEDBACK TEXT: "It's a mixed bag — some good days, some tough ones. Hard to say overall."
+EXPECTED: Deliberately ambiguous — good case for the adaptive/confidence-weighting idea.
+
+
+CASE 10 — Severe case with help-seeking already in progress
+------------------------------------------------------------
+age: 38
+gender: Female
+job_role: Product Manager
+experience_years: 11
+company_size: Large
+work_mode: Hybrid
+work_hours_per_week: 56
+overtime_hours: 11
+meetings_per_day: 6
+deadlines_missed: 2
+sleep_hours: 5
+physical_activity_days: 1
+screen_time_hours: 10
+caffeine_intake: 4
+has_therapy: Yes
+seeks_professional_help: Yes
+
+job_satisfaction: Low
+manager_support: Moderate
+work_life_balance: Low
+social_support_score: Moderate
+stress_level: High
+anxiety_score: High
+depression_score: High
+
+FEEDBACK TEXT: "I've started therapy because I've been struggling to keep up, but the workload keeps piling on regardless."
+EXPECTED: High risk — realistic case where the employee is already seeking help.
+
+
+AFTER RUNNING ALL 10:
+Run weight_sensitivity_test.py again — it will automatically pick up these
+new assessment JSON files alongside your previous ones from
+outputs/assessments/, giving you a combined, more deliberately varied
+dataset for the sensitivity analysis and SHAP examples.

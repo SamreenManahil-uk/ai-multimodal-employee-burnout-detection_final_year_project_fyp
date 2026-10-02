@@ -1,0 +1,37 @@
+FINAL SELECTED MODEL RESULTS
+============================
+
+Selected Model: XGBoost
+Selection Metric: Mean 5-Fold Cross-Validation F1
+Selected Model CV F1: 0.701834
+Selected Model CV ROC-AUC: 0.959448
+
+Methodology
+-----------
+SMOTE was applied only within each cross-validation training fold.
+The model was selected without using the test set.
+Only the selected model was evaluated on the untouched test set.
+
+Final Test Set Results
+----------------------
+Test Accuracy: 0.927700
+Test Precision: 0.708819
+Test Recall: 0.695510
+Test F1: 0.702101
+Test ROC-AUC: 0.957966
+
+Confusion Matrix
+----------------
+[[8425  350]
+ [ 373  852]]
+
+Classification Report
+---------------------
+              precision    recall  f1-score   support
+
+           0       0.96      0.96      0.96      8775
+           1       0.71      0.70      0.70      1225
+
+    accuracy                           0.93     10000
+   macro avg       0.83      0.83      0.83     10000
+weighted avg       0.93      0.93      0.93     10000

@@ -1,0 +1,22 @@
+RANDOM FOREST MODEL RESULTS
+===========================
+
+Model-selection methodology
+---------------------------
+SMOTE was applied inside each cross-validation training fold.
+The test set was not used during cross-validation or model selection.
+
+5-Fold Cross-Validation Results
+--------------------------------
+CV Accuracy: 0.925975
+CV Precision: 0.695825
+CV Recall: 0.703594
+CV F1: 0.699628
+CV ROC-AUC: 0.956096
+CV Accuracy Standard Deviation: 0.001321
+CV Precision Standard Deviation: 0.005524
+CV Recall Standard Deviation: 0.011880
+CV F1 Standard Deviation: 0.006638
+CV ROC-AUC Standard Deviation: 0.001121
+
+Final test-set results are produced only for the selected model in compare_models.py.
